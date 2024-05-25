@@ -1,0 +1,124 @@
+{
+  "staff": [
+    {
+      "id": 1,
+      "firstName": "John",
+      "lastName": "Smith",
+      "avatar": "avatar1.svg"
+    },
+    {
+      "id": 2,
+      "firstName": "Jane",
+      "lastName": "Doe",
+      "avatar": "avatar2.svg"
+    },
+    {
+      "id": 3,
+      "firstName": "Mike",
+      "lastName": "Johnson",
+      "avatar": "avatar3.svg"
+    },
+    {
+      "id": 4,
+      "firstName": "Emily",
+      "lastName": "Davis",
+      "avatar": "avatar4.svg"
+    },
+    {
+      "id": 5,
+      "firstName": "David",
+      "lastName": "Wilson",
+      "avatar": "avatar5.svg"
+    },
+    {
+      "id": 6,
+      "firstName": "Laura",
+      "lastName": "Martinez",
+      "avatar": "avatar6.svg"
+    },
+    {
+      "id": 7,
+      "firstName": "Chris",
+      "lastName": "Brown",
+      "avatar": "avatar7.svg"
+    },
+    {
+      "id": 8,
+      "firstName": "Anna",
+      "lastName": "Taylor",
+      "avatar": "avatar1.svg"
+    },
+    {
+      "id": 9,
+      "firstName": "James",
+      "lastName": "Anderson",
+      "avatar": "avatar2.svg"
+    },
+    {
+      "id": 10,
+      "firstName": "Sophia",
+      "lastName": "Thomas",
+      "avatar": "avatar3.svg"
+    },
+    {
+      "id": 11,
+      "firstName": "Matthew",
+      "lastName": "Jackson",
+      "avatar": "avatar4.svg"
+    },
+    {
+      "id": 12,
+      "firstName": "Olivia",
+      "lastName": "White",
+      "avatar": "avatar5.svg"
+    },
+    {
+      "id": 13,
+      "firstName": "Ethan",
+      "lastName": "Harris",
+      "avatar": "avatar6.svg"
+    },
+    {
+      "id": 14,
+      "firstName": "Isabella",
+      "lastName": "Martin",
+      "avatar": "avatar7.svg"
+    },
+    {
+      "id": 15,
+      "firstName": "Alexander",
+      "lastName": "Lee",
+      "avatar": "avatar1.svg"
+    },
+    {
+      "id": 16,
+      "firstName": "Mia",
+      "lastName": "Perez",
+      "avatar": "avatar1.svg"
+    },
+    {
+      "id": 17,
+      "firstName": "Daniel",
+      "lastName": "Thompson",
+      "avatar": "avatar4.svg"
+    },
+    {
+      "id": 18,
+      "firstName": "Ava",
+      "lastName": "Garcia",
+      "avatar": "avatar1.svg"
+    },
+    {
+      "id": 19,
+      "firstName": "Jacob",
+      "lastName": "Rodriguez",
+      "avatar": "avatar7.svg"
+    },
+    {
+      "id": 20,
+      "firstName": "Charlotte",
+      "lastName": "Lewis",
+      "avatar": "avatar2.svg"
+    }
+  ]
+}

@@ -1,0 +1,114 @@
+{
+  "offices": [
+    {
+      "Id": 1,
+      "Name": "Main Office",
+      "Description": "Headquarters",
+      "Capacity": 50,
+      "People": [1, 2, 3, 4, 5],
+      "contactNumber": "0115557777",
+      "email": "mainoffice@temp.co.za",
+      "address": "123 Main St, Cape Town, South Africa, 0001",
+      "officeColour": "Blue"
+    },
+    {
+      "Id": 2,
+      "Name": "Satellite Office",
+      "Description": "Branch Office",
+      "Capacity": 30,
+      "People": [6, 7, 8, 9, 10],
+      "contactNumber": "0115558888",
+      "email": "satellite@temp.co.za",
+      "address": "456 Side St, Johannesburg, South Africa, 0002",
+      "officeColour": "Red"
+    },
+    {
+      "Id": 3,
+      "Name": "Development Center",
+      "Description": "Software Development Hub",
+      "Capacity": 40,
+      "People": [11, 12, 13, 14, 15],
+      "contactNumber": "0115559999",
+      "email": "devcenter@temp.co.za",
+      "address": "789 Tech Rd, Durban, South Africa, 0003",
+      "officeColour": "Green"
+    },
+    {
+      "Id": 4,
+      "Name": "Research Lab",
+      "Description": "Innovation and Research",
+      "Capacity": 20,
+      "People": [16, 17, 18, 19, 20],
+      "contactNumber": "0115550000",
+      "email": "research@temp.co.za",
+      "address": "101 Science Blvd, Pretoria, South Africa, 0004",
+      "officeColour": "Yellow"
+    },
+    {
+      "Id": 5,
+      "Name": "Marketing Office",
+      "Description": "Marketing and Sales",
+      "Capacity": 25,
+      "People": [1, 3, 5, 7, 9],
+      "contactNumber": "0115551111",
+      "email": "marketing@temp.co.za",
+      "address": "202 Sales St, Port Elizabeth, South Africa, 0005",
+      "officeColour": "Purple"
+    },
+    {
+      "Id": 6,
+      "Name": "Finance Office",
+      "Description": "Finance Department",
+      "Capacity": 15,
+      "People": [2, 4, 6, 8, 10],
+      "contactNumber": "0115552222",
+      "email": "finance@temp.co.za",
+      "address": "303 Money Ave, Bloemfontein, South Africa, 0006",
+      "officeColour": "Orange"
+    },
+    {
+      "Id": 7,
+      "Name": "Customer Support",
+      "Description": "Customer Support Center",
+      "Capacity": 35,
+      "People": [11, 13, 15, 17, 19],
+      "contactNumber": "0115553333",
+      "email": "support@temp.co.za",
+      "address": "404 Help Rd, East London, South Africa, 0007",
+      "officeColour": "Pink"
+    },
+    {
+      "Id": 8,
+      "Name": "Human Resources",
+      "Description": "HR Department",
+      "Capacity": 20,
+      "People": [12, 14, 16, 18, 20],
+      "contactNumber": "0115554444",
+      "email": "hr@temp.co.za",
+      "address": "505 People St, Kimberly, South Africa, 0008",
+      "officeColour": "Brown"
+    },
+    {
+      "Id": 9,
+      "Name": "IT Support",
+      "Description": "IT Support Center",
+      "Capacity": 30,
+      "People": [1, 6, 11, 16, 20],
+      "contactNumber": "0115555555",
+      "email": "itsupport@temp.co.za",
+      "address": "606 Tech Park, George, South Africa, 0009",
+      "officeColour": "Gray"
+    },
+    {
+      "Id": 10,
+      "Name": "Logistics",
+      "Description": "Logistics and Supply Chain",
+      "Capacity": 25,
+      "People": [2, 7, 12, 17, 19],
+      "contactNumber": "0115556666",
+      "email": "logistics@temp.co.za",
+      "address": "707 Supply Ln, Polokwane, South Africa, 0010",
+      "officeColour": "Cyan"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+.card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 8px 0;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .card-info {
+    margin-top: 8px;
+    margin-bottom: 8px;
+  }
+  
+  .card-button {
+    background: none;
+    border: none;
+    color: #007BFF;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+  }
+  
+  .card-details {
+    margin-top: 8px;
+  }
+  
+  .card-icon {
+    cursor: pointer;
+  }
