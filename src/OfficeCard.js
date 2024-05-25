@@ -43,6 +43,16 @@ const OfficeCard = () => {
     setSearchQuery(event.target.value.toLowerCase());
   };
 
+  const filterStaff = (officePeople) => {
+    if (searchQuery === '') {
+      return officePeople;
+    }
+    return officePeople.filter((personId) => {
+      const person = staff.find((p) => p.id === personId);
+      return person && `${person.firstName} ${person.lastName}`.toLowerCase().includes(searchQuery);
+    });
+  };
+
   return (
     <div>
       {offices.map((office) => (
@@ -74,10 +84,16 @@ const OfficeCard = () => {
             )}
             {showStaffList === office.Id && (
               <div className="staff-list">
-                <input type="text" placeholder="Search" className="search-bar" />
+                <input
+                  type="text"
+                  placeholder="Search"
+                  className="search-bar"
+                  value={searchQuery}
+                  onChange={handleSearchChange}
+                />
                 <h3>Staff Members In Office</h3>
                 <ul>
-                  {office.People.map((personId) => {
+                {filterStaff(office.People).map((personId) => {
                     const person = staff.find((p) => p.id === personId);
                     return person ? (
                       <li key={person.id}>
