@@ -1,9 +1,10 @@
 import React, { useContext, useState } from 'react';
 import './officeapp.css';
-import { DataContext } from './DataContext';
+import { DataContext, OfficeRenderStatus } from './DataContext';
 import OfficeCard from './OfficeCard';
 import OfficeStaff from './OfficeStaff';
 import OfficeEdit from './OfficeEdit';
+import OfficeAdd from './OfficeAdd';
 import backArrowIcon from './assets/arrow-left.svg';
 import plusButton from './assets/plusbutton.svg';
 import {AddStaffOverlayStep1, AddStaffOverlayStep2 } from './AddStaffOverlay';
@@ -27,7 +28,8 @@ const avatarMap = {
 };
 
 function OfficeApp() {
-  const { officeData, setOfficeData, activeOfficeId, setActiveOfficeId, staffData, setStaffData, isOfficeEditing, setIsOfficeEditing } = useContext(DataContext);
+  const { officeData, setOfficeData, activeOfficeId, setActiveOfficeId, staffData, setStaffData, 
+          isOfficeRenderStatus, setOfficeRenderStatus } = useContext(DataContext);
   const activeOffice = officeData.find(office => office.Id === activeOfficeId);
   
   //States for Add staff memeber
@@ -36,15 +38,14 @@ function OfficeApp() {
   const [staffName, setStaffName] = useState('');
   const [staffSurname, setStaffSurname] = useState('');
   const [selectedAvatar, setSelectedAvatar] = useState(null);
-  //const [isOfficeEditing, setIsOfficeEditing] = useState(activeOfficeId === null || !activeOfficeId);//TODO: should this be a useEffect?
 
   //Handle Back Navigation from Office
   const onHandleBackNav = () => {
-    setIsOfficeEditing(false)
-    setActiveOfficeId(null)
+    setOfficeRenderStatus(OfficeRenderStatus.LIST_ALL);
+    setActiveOfficeId(null);
   };
 
-  //Handlers to add new staff memeber
+  //Handlers to add new staff member
   const onNext = () => {
     setCurrentStep(2);
   };
@@ -84,14 +85,15 @@ function OfficeApp() {
     setSelectedAvatar(null);
   };
 
-  const handleEditOffice = () => {
-    setIsOfficeEditing(true);
+  const handleEditOfficeBack = () => {
+    setOfficeRenderStatus(OfficeRenderStatus.LIST_ALL);
+    setActiveOfficeId(null);
+
   };
 
-  const handleEditOfficeBack = () => {
-    setIsOfficeEditing(false);
-    setActiveOfficeId(null)
-  };
+  const onHandleAddOffice = () => {
+    setOfficeRenderStatus(OfficeRenderStatus.ADD_MODE);
+  }
 
   const onHandleAddStaff = () => {
     //Get the capacity of the active office staff being added too
@@ -105,23 +107,44 @@ function OfficeApp() {
     }
   }
   
-  const renderAllOfficeOrEditOffice =()=>{
-    if(!isOfficeEditing)
-      return (<>
-        <h2 className="header">All Offices</h2>
-        {officeData.map((office) => (
-          <OfficeCard key={office.Id} 
-                      singleOfficeData={office} />
-        ))}
-        <img src={plusButton} 
-            alt="Add Office" 
-            className="plus-button main-plus-button" 
-            title="Add New Office"
-        />
-      </>)
-    else return ( //Else you are editing a office card
-      <OfficeEdit isNew={false} office={activeOffice} onBack={handleEditOfficeBack}/>
-    )
+  const renderAllOfficeOrEditOffice = () => {
+    switch (isOfficeRenderStatus) {
+      case OfficeRenderStatus.LIST_ALL:
+          return (<>
+            <h2 className="header">All Offices</h2>
+            {officeData.map((office) => (
+              <OfficeCard key={office.Id} 
+                          singleOfficeData={office} />
+            ))}
+            <img src={plusButton} 
+                alt="Add Office" 
+                className="plus-button main-plus-button" 
+                title="Add New Office"
+                onClick={onHandleAddOffice}
+            />
+          </>)
+      case OfficeRenderStatus.ADD_MODE:
+            return <OfficeAdd onBack={handleEditOfficeBack}/>
+      case OfficeRenderStatus.EDIT_MODE:
+            return <OfficeEdit isNew={false} office={activeOffice} onBack={handleEditOfficeBack}/>
+    }
+    // if(!isOfficeEditing)
+    //   return (<>
+    //     <h2 className="header">All Offices</h2>
+    //     {officeData.map((office) => (
+    //       <OfficeCard key={office.Id} 
+    //                   singleOfficeData={office} />
+    //     ))}
+    //     <img src={plusButton} 
+    //         alt="Add Office" 
+    //         className="plus-button main-plus-button" 
+    //         title="Add New Office"
+    //         onClick={onHandleAddOffice}
+    //     />
+    //   </>)
+    // else return ( //Else you are editing a office card
+    //   <OfficeEdit isNew={false} office={activeOffice} onBack={handleEditOfficeBack}/>
+    // )
   }
   const renderSingleOfficeWithStaffView = () => {
     return (
@@ -133,13 +156,15 @@ function OfficeApp() {
         </button>
         <OfficeCard key={activeOffice.Id} 
                     singleOfficeData={activeOffice} />
-        <OfficeStaff/>
-        <img src={plusButton} 
-              alt="Add Staff" 
-              className="plus-button main-plus-button" 
-              title="Add New Staff Member"
-              onClick={onHandleAddStaff}
-        />
+        <div>
+          <OfficeStaff/>
+          <img src={plusButton} 
+                alt="Add Staff" 
+                className="plus-button staff-plus-button" 
+                title="Add New Staff Member"
+                onClick={onHandleAddStaff}
+          />
+         </div>
      </>)
     
   }

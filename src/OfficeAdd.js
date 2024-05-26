@@ -1,8 +1,8 @@
 import React, { useState, useContext } from 'react';
-import './addoffice.css';
+import './officeedit.css';
 import { DataContext } from './DataContext';
 
-const AddOffice = ({ onBack }) => {
+const OfficeAdd = ({ onBack }) => {
   const { officeData, setOfficeData } = useContext(DataContext);
   const [officeName, setOfficeName] = useState('');
   const [address, setAddress] = useState('');
@@ -80,5 +80,5 @@ const AddOffice = ({ onBack }) => {
   );
 };
 
-export default AddOffice;
+export default OfficeAdd;
 

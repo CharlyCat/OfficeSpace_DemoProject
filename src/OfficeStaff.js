@@ -10,6 +10,8 @@ import avatar4 from './assets/Avatar4.svg';
 import avatar5 from './assets/Avatar5.svg';
 import avatar6 from './assets/Avatar6.svg';
 import avatar7 from './assets/Avatar7.svg';
+import EditStaffMemberPopup from './EditStaffMemberPopup';
+import ConfirmDeletePopup from './ConfirmDeletePopup';
 
 const avatarMap = {
   'avatar1.svg': avatar1,
@@ -21,11 +23,14 @@ const avatarMap = {
   'avatar7.svg': avatar7,
 };
 
+//Render Single Office accordion and Staff member list
 const OfficeStaff = () => {
-  console.log("Rendering the OfficeStaff component")
-  const {activeOfficeId, staffData, officeData } = useContext(DataContext);
+  const {activeOfficeId, staffData, officeData, setStaffData } = useContext(DataContext);
   const [searchQuery, setSearchQuery] = useState('');
-  const [activeOfficeStaff, setActiveOfficeStaff] = useState(()=>{
+  const [showEditPopup, setShowEditPopup] = useState(false);
+  const [selectedStaff, setSelectedStaff] = useState(null);
+  const [showDeletePopup, setShowDeletePopup] = useState(false);
+  const [activeOfficeStaff, setActiveOfficeStaff] = useState(()=> {
     let currentActiveOffice = officeData.find((singleOffice) => singleOffice.Id === activeOfficeId);
     let results = (currentActiveOffice) ? currentActiveOffice.People : [];
     return results
@@ -50,6 +55,29 @@ const OfficeStaff = () => {
       return person && `${person.firstName} ${person.lastName}`.toLowerCase().includes(searchQuery);
     });
   };
+  console.log('staff list =',staffData)
+  
+  const handleEditClick = (staffId) => {
+    console.log("Edint staff ID", staffId)
+    setSelectedStaff(staffId);
+    setShowEditPopup(true);
+  };
+
+  const handleDeleteClick = () => {
+    setShowEditPopup(false);
+    setShowDeletePopup(true);
+  };
+
+  const handleConfirmDelete = () => {
+    const updatedStaffData = staffData.filter((staff) => staff.id !== selectedStaff);
+    setStaffData(updatedStaffData);
+    setShowDeletePopup(false);
+  };
+
+  const handleEditStaff = () => {
+    // Implement edit staff logic here
+    setShowEditPopup(false);
+  };
   
   return (
     <div className="office-staff-container">
@@ -71,13 +99,14 @@ const OfficeStaff = () => {
               <p>No Staff Found</p>
             ) : (
               filterStaff(activeOfficeStaff).map((personId) => {
-                console.log('filtering staff')
                 const person = staffData.find((p) => p.id === personId);
                 return person ? (
-                  <li key={person.id} className="staff-list-item">
-                    <img src={avatarMap[person.avatar]} alt={`${person.firstName} ${person.lastName}`} className="avatar" />
-                    <span>{person.firstName} {person.lastName}</span>
-                    <button className="manage-button">
+                    <li key={person.id} className="staff-list-item">
+                    <div className="staff-details">
+                      <img src={avatarMap[person.avatar]} alt={`${person.firstName} ${person.lastName}`} className="avatar" />
+                      <span className="staff-name">{person.firstName} {person.lastName}</span>
+                    </div>
+                      <button className="manage-button" onClick={() => handleEditClick(person.id)}>
                       <img src={manageIcon} alt="Manage Staff" title="Manage Staff Member" />
                     </button>
                   </li>
@@ -87,6 +116,19 @@ const OfficeStaff = () => {
           </ul>
         </div>
       </div>
+      {showEditPopup && (
+        <EditStaffMemberPopup
+          onEdit={handleEditStaff}
+          onDelete={handleDeleteClick}
+          onClose={() => setShowEditPopup(false)}
+        />
+      )}
+      {showDeletePopup && (
+        <ConfirmDeletePopup
+          onConfirmDelete={handleConfirmDelete}
+          onCancel={() => setShowDeletePopup(false)}
+        />
+      )}      
     </div>
   );
 };

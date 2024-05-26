@@ -1,0 +1,156 @@
+/* addstaffoverlay.css */
+
+/* General styles for overlay */
+.addstaff-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.addstaff-overlay-content {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 400px;
+  width: 100%;
+  position: relative;
+}
+
+.addstaff-overlay-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.addstaff-overlay-header h2 {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0;
+  flex-grow: 1;
+  text-align: center;
+}
+
+.addstaff-close-button, .addstaff-back-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.addstaff-overlay-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.addstaff-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.addstaff-input-group input {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.addstaff-overlay-footer {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.addstaff-next-button, .addstaff-save-button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.addstaff-next-button:hover, .addstaff-save-button:hover {
+  background-color: #0056b3;
+}
+
+.addstaff-avatar-selection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.addstaff-avatar-row {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 300px;
+}
+
+.addstaff-avatar-icon {
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+  border-radius: 50%;
+  border: 2px solid transparent;
+}
+
+.addstaff-avatar-icon.selected {
+  border-color: #007bff;
+}
+
+.addstaff-avatar-heading {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0 0 10px 0;
+  text-align: left;
+  width: 100%;
+}
+
+@media (max-width: 420px) {
+  .addstaff-overlay-content {
+    padding: 15px;
+  }
+
+  .addstaff-next-button, .addstaff-save-button {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .addstaff-avatar-icon {
+    width: 50px;
+    height: 50px;
+  }
+
+  .addstaff-overlay-header h2 {
+    font-size: 18px;
+  }
+
+  .addstaff-input-group input {
+    padding: 8px;
+    font-size: 14px;
+  }
+
+  .addstaff-avatar-row {
+    justify-content: center;
+  }
+}
+
+  

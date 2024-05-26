@@ -20,7 +20,7 @@ const avatarMap = {
   'avatar7.svg': avatar7,
 };
 
-export const AddStaffOverlayStep1 = ({ onNext, onClose, staffName, setStaffName, staffSurname, setStaffSurname }) => {
+export const EditStaffOverlayStep1 = ({ onNext, onClose, staffName, setStaffName, staffSurname, setStaffSurname }) => {
     const handleNext = (e) => {
       e.preventDefault();
       onNext();
@@ -30,10 +30,11 @@ export const AddStaffOverlayStep1 = ({ onNext, onClose, staffName, setStaffName,
       <div className="addstaff-overlay">
         <div className="addstaff-overlay-content">
           <div className="addstaff-overlay-header">
-            <h2>New Staff Member</h2>
             <button className="addstaff-close-button" onClick={onClose}>
               <img src={closeIcon} alt="Close" />
             </button>
+            <h2>Edit Staff Member</h2>
+            <span style={{ width: 30 }}></span> {/* Placeholder to balance the header */}
           </div>
           <form onSubmit={handleNext} className="addstaff-overlay-form">
             <div className="addstaff-input-group">
@@ -70,12 +71,6 @@ export const AddStaffOverlayStep1 = ({ onNext, onClose, staffName, setStaffName,
       e.preventDefault();
       onSave();
     };
-
-    const onHandleAvatarSelection = (avatarKey) => {
-      console.log('avatarKey =',avatarKey)
-      console.log('avatarMap =',avatarMap)
-      setSelectedAvatar(avatarMap[avatarKey])
-    }
   
     return (
       <div className="addstaff-overlay">
@@ -84,35 +79,22 @@ export const AddStaffOverlayStep1 = ({ onNext, onClose, staffName, setStaffName,
             <button className="addstaff-back-button" onClick={onBack}>
               <img src={backArrowIcon} alt="Back" />
             </button>
-            <h2>New Staff Member</h2>
+            <h2>Edit Staff Member</h2>
             <button className="addstaff-close-button" onClick={onClose}>
               <img src={closeIcon} alt="Close" />
             </button>
           </div>
           <h3 className="addstaff-avatar-heading">Avatar</h3>
           <div className="addstaff-avatar-selection">
-            <div className="addstaff-avatar-row">
-              {avatars.slice(0, 4).map((avatarKey, index) => (
-                <img
-                  key={index}
-                  src={avatarMap[avatarKey]}
-                  alt={`Avatar ${index + 1}`}
-                  className={`addstaff-avatar-icon ${selectedAvatar === avatarMap[avatarKey] ? 'selected' : ''}`}
-                  onClick={()=> onHandleAvatarSelection(avatarKey)}
-                />
-              ))}
-            </div>
-            <div className="addstaff-avatar-row">
-              {avatars.slice(4).map((avatarKey, index) => (
-                <img
-                  key={index}
-                  src={avatarMap[avatarKey]}
-                  alt={`Avatar ${index + 1}`}
-                  className={`addstaff-avatar-icon ${selectedAvatar === avatarMap[avatarKey] ? 'selected' : ''}`}
-                  onClick={()=> onHandleAvatarSelection(avatarKey)}
-                />
-              ))}
-            </div>
+            {avatars.map((avatarKey, index) => (
+              <img
+                key={index}
+                src={avatarMap[avatarKey]}
+                alt={`Avatar ${index + 1}`}
+                className={`addstaff-avatar-icon ${selectedAvatar === avatarMap[avatarKey] ? 'selected' : ''}`}
+                onClick={() => setSelectedAvatar(avatarMap[avatarKey])}
+              />
+            ))}
           </div>
           <div className="addstaff-overlay-footer">
             <button type="button" className="addstaff-save-button" onClick={handleSave}>Add Staff Member</button>

@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import './officeapp.css';
-import { DataContext } from './DataContext';
+import { DataContext, OfficeRenderStatus } from './DataContext';
 import pencilIcon from './assets/edit.svg';
 import staffIcon from './assets/people.svg';
 import phoneIcon from './assets/phone.svg';
@@ -9,7 +9,7 @@ import locationIcon from './assets/location.svg';
 import OfficeEdit from './OfficeEdit';
 
 const OfficeCard = ({singleOfficeData}) => {
-  const { setActiveOfficeId,isOfficeEditing, setIsOfficeEditing } = useContext(DataContext);
+  const { setActiveOfficeId, setOfficeRenderStatus } = useContext(DataContext);
   const [expandedOfficeId, setExpandedOfficeId] = useState(null);
   
 
@@ -22,12 +22,12 @@ const OfficeCard = ({singleOfficeData}) => {
   };
 
   const handleShowStaffList = (id) => {
-    console.log("Changing to staff view by setting active office ID",id);
     setActiveOfficeId(id);
   };
 
   const handleEditOffice = () => {
-    setIsOfficeEditing(true);
+    setOfficeRenderStatus(OfficeRenderStatus.EDIT_MODE);
+    //setIsOfficeEditing(true);
   };
 
   // const handleBack = () => {
@@ -47,7 +47,9 @@ const OfficeCard = ({singleOfficeData}) => {
           <div className="card-content">
             <div className="card-header">
               <h2 onClick={() => handleShowStaffList(singleOfficeData.Id)}>{singleOfficeData.Name}</h2>
-              <span className="card-icon" onClick={handleEditOffice}>
+              <span className="card-icon" 
+                    onClick={handleEditOffice}>
+                    <img src={pencilIcon} alt="Edit" />
               </span>
             </div>
             <div className="card-info" 

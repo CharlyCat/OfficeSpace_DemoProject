@@ -61,8 +61,8 @@ const OfficeEdit = ({ office, onBack, isNew }) => {
         <button className="back-button" 
                   onClick={onBack}>
               <img src={backArrowIcon} alt="Back" className="back-arrow-icon" />
-              <span className="back-button-text">
-              <h2 className="title">{isNew ? 'Add Office' : 'Edit Office'}</h2>
+              <span>
+              <p className="back-button-text">{isNew ? 'Add Office' : 'Edit Office'}</p>
               </span>
           </button>
       <form className="edit-office-form" onSubmit={handleSubmit}>
