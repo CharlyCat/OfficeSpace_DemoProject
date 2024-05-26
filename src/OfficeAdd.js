@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import './officeadd.css';
 import { DataContext } from './DataContext';
 import backArrowIcon from './assets/arrow-left.svg';
+import {generateUUID} from './Utils'
 
 const OfficeAdd = ({ onBack }) => {
   const { officeData, setOfficeData } = useContext(DataContext);
@@ -16,7 +17,7 @@ const OfficeAdd = ({ onBack }) => {
 
   const handleAddOffice = () => {
     const newOffice = {
-      Id: officeData.length + 1,
+      Id: generateUUID(),
       Name: officeName,
       Description: address,
       Capacity: parseInt(capacity),

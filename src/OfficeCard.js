@@ -22,12 +22,12 @@ const OfficeCard = ({singleOfficeData}) => {
 
   const handleShowStaffList = (id) => {
     setActiveOfficeId(id);
+    setOfficeRenderStatus(OfficeRenderStatus.VIEW_MODE);
   };
 
   const handleEditOffice = (id) => {
     setOfficeRenderStatus(OfficeRenderStatus.EDIT_MODE);
     setActiveOfficeId(id);
-
   };
 
   return (

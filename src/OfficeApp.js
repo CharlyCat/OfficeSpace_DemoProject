@@ -93,7 +93,6 @@ function OfficeApp() {
     };
 
     //Update Staff data
-    //setStaffData([...staffData, updatedStaffMember]);
     setStaffData((previousData)=>{
       console.log(previousData);
       let updatedData = {...previousData};
@@ -156,6 +155,8 @@ function OfficeApp() {
             return <OfficeAdd onBack={handleEditOfficeBack}/>
       case OfficeRenderStatus.EDIT_MODE:
             return <OfficeEdit office={activeOffice} onBack={handleEditOfficeBack}/>
+      case OfficeRenderStatus.VIEW_MODE:
+        return renderSingleOfficeWithStaffView();            
       case OfficeRenderStatus.LIST_ALL:          
       default: 
             return (<>
@@ -200,11 +201,7 @@ function OfficeApp() {
   console.log("isEditOverlayOpen=",isEditOverlayOpen)
   return (
     <div className="container">
-      {!activeOffice ? 
-        renderAllOfficeOrEditOffice()
-      :
-        renderSingleOfficeWithStaffView()
-      }
+      {renderAllOfficeOrEditOffice()}
 
       {isAddOverlayOpen && (
         currentStep === 1 ? (

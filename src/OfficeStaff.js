@@ -46,16 +46,46 @@ const OfficeStaff = () => {
     setSearchQuery(event.target.value.toLowerCase());
   };
 
-  const filterStaff = (officePeople) => {
-    if (!searchQuery || searchQuery === '' ) {
+  const filterStaffBasedOnQuery = (officePeople) => {
+    // If searchQuery is empty or only whitespace, return the full list of active office staff
+    if (!searchQuery || searchQuery.trim() === '') {
+      console.log("Returning the full list as there is not query string", activeOfficeStaff);
       return activeOfficeStaff;
     }
-    return officePeople.filter((personId) => {
-      const person = staffData.find((p) => p.Id === personId);
-      return person && `${person.firstName} ${person.lastName}`.toLowerCase().includes(searchQuery);
+  
+    console.log("activeOfficeStaff=", activeOfficeStaff);
+    console.log('Filtering staff using query string =', searchQuery);
+  
+    // Get the list of all staff members that are part of the active office, this includes the full names
+    const activeStaffWithNames = officePeople.map(personId => {
+      // Find the full staff data for each person in officePeople
+      return staffData.find(staff => staff.id === personId);
+    }).filter(Boolean); // Filter out any undefined values in case of missing staff data
+  
+    // Log active staff for debugging purposes
+    console.log('Active staff in the office:', activeStaffWithNames);
+  
+    // Filter the active staff list based on the search query
+    const filteredStaff = activeStaffWithNames.filter((person) => {
+      console.log('Person =', person);
+      let staffName = `${person.firstName} ${person.lastName}`;
+      let found = staffName.toLowerCase().includes(searchQuery.toLowerCase().trim());
+      console.log('staffName =', staffName, "Found =", found);
+      return found;
     });
+    let filteredStaffListOnlyIds = [];
+    filteredStaff.map((staffMember) =>{
+      console.log("staffMember",staffMember)
+      filteredStaffListOnlyIds.push(staffMember.id);
+    })
+
+    console.log("filteredStaffListOnlyIds",filteredStaffListOnlyIds)
+  
+    // Return the list of filtered staff members
+    return filteredStaffListOnlyIds;
   };
-  console.log('staff list =',staffData)
+  
+  
   
   const handleEditClick = (staffId) => {
     console.log("Edint staff ID", staffId)
@@ -116,9 +146,11 @@ const OfficeStaff = () => {
           <h3>Staff Members In Office</h3>
           <ul>
             {!activeOfficeStaff.length ? (
-              <p>No Staff Found</p>
+              <li className="staff-list-item">
+                <span>No Staff Found</span>
+              </li>
             ) : (
-              filterStaff(activeOfficeStaff).map((personId) => {
+              filterStaffBasedOnQuery(activeOfficeStaff).map((personId) => {
                 const person = staffData.find((p) => p.id === personId);
                 return person ? (
                     <li key={person.id} className="staff-list-item">

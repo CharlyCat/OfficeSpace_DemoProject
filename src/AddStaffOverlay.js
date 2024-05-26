@@ -53,7 +53,7 @@ export const AddStaffOverlayStep1 = ({ onNext, onClose, setStaffName, setStaffSu
               />
             </div>
             <div className="addstaff-overlay-footer">
-              <button type="submit" className="addstaff-next-button">Next</button>
+              <button type="submit" className="addstaff-next-button">NEXT</button>
             </div>
           </form>
         </div>
