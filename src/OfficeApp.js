@@ -8,6 +8,7 @@ import OfficeAdd from './OfficeAdd';
 import backArrowIcon from './assets/arrow-left.svg';
 import plusButton from './assets/plusbutton.svg';
 import {AddStaffOverlayStep1, AddStaffOverlayStep2 } from './AddStaffOverlay';
+import {EditStaffOverlayStep1, EditStaffOverlayStep2 } from './EditStaffOverlay';
 import {generateUUID} from './Utils';
 import avatar1 from './assets/Avatar1.svg';
 import avatar2 from './assets/Avatar2.svg';
@@ -29,11 +30,12 @@ const avatarMap = {
 
 function OfficeApp() {
   const { officeData, setOfficeData, activeOfficeId, setActiveOfficeId, staffData, setStaffData, 
-          isOfficeRenderStatus, setOfficeRenderStatus } = useContext(DataContext);
+          officeRenderStatus, setOfficeRenderStatus, staffId, setStaffId } = useContext(DataContext);
   const activeOffice = officeData.find(office => office.Id === activeOfficeId);
   
   //States for Add staff memeber
-  const [isOverlayOpen, setIsOverlayOpen] = useState(false);
+  const [isEditOverlayOpen, setIsEditOverlayOpen] = useState(false);
+  const [isAddOverlayOpen, setIsAddOverlayOpen] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
   const [staffName, setStaffName] = useState('');
   const [staffSurname, setStaffSurname] = useState('');
@@ -49,10 +51,12 @@ function OfficeApp() {
   const onNext = () => {
     setCurrentStep(2);
   };
+  
   const onBack = () => {
     setCurrentStep(1);
   };
-  const onSave = () => {
+  
+  const onSaveAddStaffMember = () => {
     const newId = generateUUID();
     const newStaffMember = {
       id: newId,
@@ -71,16 +75,53 @@ function OfficeApp() {
     setOfficeData(updatedOfficeData);
 
     // Close overlay and reset state
-    setIsOverlayOpen(false);
+    setIsAddOverlayOpen(false);
     setCurrentStep(1);
     setStaffName('');
+    setStaffId('');
     setStaffSurname('');
     setSelectedAvatar(null);
   };
-  const onClose = () => {
-    setIsOverlayOpen(false);
+
+  const onSaveEditStaffMember = () => {
+    
+    const updatedStaffMember = {
+      id: staffId, 
+      firstName: staffName,
+      lastName: staffSurname,
+      avatar: Object.keys(avatarMap).find(key => avatarMap[key] === selectedAvatar),
+    };
+
+    //Update Staff data
+    //setStaffData([...staffData, updatedStaffMember]);
+    setStaffData((previousData)=>{
+      console.log(previousData);
+      let updatedData = {...previousData};
+      updatedData.foreach((item) => {
+        //If this is the staff member then update the data
+        if(item.id === staffId){
+          item = updatedStaffMember;
+        }
+      })
+      return updatedData;
+    })
+
+    // Close overlay and reset state
+    setIsEditOverlayOpen(false);
     setCurrentStep(1);
     setStaffName('');
+    setStaffId('');
+    setStaffSurname('');
+    setSelectedAvatar(null);
+  };
+  
+
+  const onCloseStaffMember = () => {
+    setIsEditOverlayOpen(false);
+    setIsAddOverlayOpen(false);
+    setCurrentStep(1);
+    setStaffName('');
+    setStaffId('');
     setStaffSurname('');
     setSelectedAvatar(null);
   };
@@ -100,7 +141,7 @@ function OfficeApp() {
     const activeOfficeCapacity = activeOffice.Capacity
     if(activeOffice.People.length < activeOfficeCapacity)
     {
-      setIsOverlayOpen(true)
+      setIsAddOverlayOpen(true)
     } else {
       //Show warning pop-up that the office is at capacity
       alert('The office is at full capacity. Unable to add more staff.');
@@ -108,43 +149,29 @@ function OfficeApp() {
   }
   
   const renderAllOfficeOrEditOffice = () => {
-    switch (isOfficeRenderStatus) {
-      case OfficeRenderStatus.LIST_ALL:
-          return (<>
-            <h2 className="header">All Offices</h2>
-            {officeData.map((office) => (
-              <OfficeCard key={office.Id} 
-                          singleOfficeData={office} />
-            ))}
-            <img src={plusButton} 
-                alt="Add Office" 
-                className="plus-button main-plus-button" 
-                title="Add New Office"
-                onClick={onHandleAddOffice}
-            />
-          </>)
+    console.log('officeRenderStatus',officeRenderStatus)
+
+    switch (officeRenderStatus) {
       case OfficeRenderStatus.ADD_MODE:
             return <OfficeAdd onBack={handleEditOfficeBack}/>
       case OfficeRenderStatus.EDIT_MODE:
-            return <OfficeEdit isNew={false} office={activeOffice} onBack={handleEditOfficeBack}/>
+            return <OfficeEdit office={activeOffice} onBack={handleEditOfficeBack}/>
+      case OfficeRenderStatus.LIST_ALL:          
+      default: 
+            return (<>
+              <h2 className="header">All Offices</h2>
+              {officeData.map((office) => (
+                <OfficeCard key={office.Id} 
+                            singleOfficeData={office} />
+              ))}
+              <img src={plusButton} 
+                  alt="Add Office" 
+                  className="plus-button main-plus-button" 
+                  title="Add New Office"
+                  onClick={onHandleAddOffice}
+              />
+            </>)
     }
-    // if(!isOfficeEditing)
-    //   return (<>
-    //     <h2 className="header">All Offices</h2>
-    //     {officeData.map((office) => (
-    //       <OfficeCard key={office.Id} 
-    //                   singleOfficeData={office} />
-    //     ))}
-    //     <img src={plusButton} 
-    //         alt="Add Office" 
-    //         className="plus-button main-plus-button" 
-    //         title="Add New Office"
-    //         onClick={onHandleAddOffice}
-    //     />
-    //   </>)
-    // else return ( //Else you are editing a office card
-    //   <OfficeEdit isNew={false} office={activeOffice} onBack={handleEditOfficeBack}/>
-    // )
   }
   const renderSingleOfficeWithStaffView = () => {
     return (
@@ -169,6 +196,8 @@ function OfficeApp() {
     
   }
 
+  console.log("isAddOverlayOpen=",isAddOverlayOpen)
+  console.log("isEditOverlayOpen=",isEditOverlayOpen)
   return (
     <div className="container">
       {!activeOffice ? 
@@ -177,26 +206,46 @@ function OfficeApp() {
         renderSingleOfficeWithStaffView()
       }
 
-      {isOverlayOpen && (
+      {isAddOverlayOpen && (
         currentStep === 1 ? (
           <AddStaffOverlayStep1
             onNext={onNext}
-            onClose={onClose}
+            onClose={onCloseStaffMember}
+            setStaffName={setStaffName}
+            setStaffSurname={setStaffSurname}
+          />
+        ) : (
+          <AddStaffOverlayStep2
+            onBack={onBack}
+            onSave={onSaveAddStaffMember}
+            onClose={onCloseStaffMember}
+            selectedAvatar={selectedAvatar}
+            setSelectedAvatar={setSelectedAvatar}
+          />
+        )
+      )}
+
+      {isEditOverlayOpen && (
+        currentStep === 1 ? (
+          <EditStaffOverlayStep1
+            onNext={onNext}
+            onClose={onCloseStaffMember}
+            staffId={staffId}
             staffName={staffName}
             setStaffName={setStaffName}
             staffSurname={staffSurname}
             setStaffSurname={setStaffSurname}
           />
         ) : (
-          <AddStaffOverlayStep2
+          <EditStaffOverlayStep2
             onBack={onBack}
-            onSave={onSave}
-            onClose={onClose}
+            onSave={onSaveEditStaffMember}
+            onClose={onCloseStaffMember}
             selectedAvatar={selectedAvatar}
             setSelectedAvatar={setSelectedAvatar}
           />
         )
-      )}
+      )}      
 
     </div>
   );

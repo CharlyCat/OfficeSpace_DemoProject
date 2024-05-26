@@ -6,7 +6,6 @@ import staffIcon from './assets/people.svg';
 import phoneIcon from './assets/phone.svg';
 import emailIcon from './assets/email.svg';
 import locationIcon from './assets/location.svg';
-import OfficeEdit from './OfficeEdit';
 
 const OfficeCard = ({singleOfficeData}) => {
   const { setActiveOfficeId, setOfficeRenderStatus } = useContext(DataContext);
@@ -25,18 +24,11 @@ const OfficeCard = ({singleOfficeData}) => {
     setActiveOfficeId(id);
   };
 
-  const handleEditOffice = () => {
+  const handleEditOffice = (id) => {
     setOfficeRenderStatus(OfficeRenderStatus.EDIT_MODE);
-    //setIsOfficeEditing(true);
-  };
+    setActiveOfficeId(id);
 
-  // const handleBack = () => {
-  //   setIsEditing(false);
-  // };
-  
-  // if (isEditing) {
-  //   return <OfficeEdit office={singleOfficeData} onBack={handleBack} isNew={false}/>;
-  // }
+  };
 
   return (
     <div>
@@ -48,7 +40,7 @@ const OfficeCard = ({singleOfficeData}) => {
             <div className="card-header">
               <h2 onClick={() => handleShowStaffList(singleOfficeData.Id)}>{singleOfficeData.Name}</h2>
               <span className="card-icon" 
-                    onClick={handleEditOffice}>
+                    onClick={()=>handleEditOffice(singleOfficeData.Id)}>
                     <img src={pencilIcon} alt="Edit" />
               </span>
             </div>

@@ -64,7 +64,7 @@ export const EditStaffOverlayStep1 = ({ onNext, onClose, staffName, setStaffName
     );
   };
   
-  export const AddStaffOverlayStep2 = ({ onBack, onSave, onClose, selectedAvatar, setSelectedAvatar }) => {
+  export const EditStaffOverlayStep2 = ({ onBack, onSave, onClose, selectedAvatar, setSelectedAvatar }) => {
     const avatars = Object.keys(avatarMap);
 
     const handleSave = (e) => {
@@ -97,7 +97,7 @@ export const EditStaffOverlayStep1 = ({ onNext, onClose, staffName, setStaffName
             ))}
           </div>
           <div className="addstaff-overlay-footer">
-            <button type="button" className="addstaff-save-button" onClick={handleSave}>Add Staff Member</button>
+            <button type="button" className="addstaff-save-button" onClick={handleSave}>UPDATE STAFF MEMBER</button>
           </div>
         </div>
       </div>

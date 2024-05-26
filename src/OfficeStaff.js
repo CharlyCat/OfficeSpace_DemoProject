@@ -25,7 +25,7 @@ const avatarMap = {
 
 //Render Single Office accordion and Staff member list
 const OfficeStaff = () => {
-  const {activeOfficeId, staffData, officeData, setStaffData } = useContext(DataContext);
+  const {activeOfficeId, staffData, officeData, setStaffData, setOfficeData } = useContext(DataContext);
   const [searchQuery, setSearchQuery] = useState('');
   const [showEditPopup, setShowEditPopup] = useState(false);
   const [selectedStaff, setSelectedStaff] = useState(null);
@@ -71,8 +71,28 @@ const OfficeStaff = () => {
   const handleConfirmDelete = () => {
     const updatedStaffData = staffData.filter((staff) => staff.id !== selectedStaff);
     setStaffData(updatedStaffData);
+  
+    let allOfficeData = [...officeData];
+    let currentActiveOfficeIndex = allOfficeData.findIndex((singleOffice) => singleOffice.Id === activeOfficeId);
+    let currentActiveOffice = null;
+  
+    if (currentActiveOfficeIndex > -1) {
+      currentActiveOffice = allOfficeData[currentActiveOfficeIndex];
+    } else {
+      console.error('Office not found');
+      return;
+    }
+    let indexToBeDeleted = currentActiveOffice.People.findIndex((item) => item === selectedStaff);
+  
+    if (indexToBeDeleted === -1) {
+      console.error('Staff member to be deleted not found');
+      return;
+    }
+    currentActiveOffice.People.splice(indexToBeDeleted, 1);
+    setOfficeData(allOfficeData);
     setShowDeletePopup(false);
   };
+  
 
   const handleEditStaff = () => {
     // Implement edit staff logic here

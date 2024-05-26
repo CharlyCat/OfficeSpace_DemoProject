@@ -2,26 +2,11 @@ import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { DataContext } from './DataContext';
 import './officeedit.css';
-import {generateUUID} from './Utils';
 import backArrowIcon from './assets/arrow-left.svg';
 
 const OfficeEdit = ({ office, onBack, isNew }) => {
-  const { officeData, setOfficeData,setActiveOfficeId,isOfficeEditing, setIsOfficeEditing } = useContext(DataContext);
+  const { officeData, setOfficeData, setActiveOfficeId} = useContext(DataContext);
   const [formData, setFormData] = useState({ ...office });
-
-  const initialFormData = isNew
-    ? {
-        Id: generateUUID(),
-        Name: '',
-        address: '',
-        email: '',
-        contactNumber: '',
-        Capacity: '1',
-        Description: '',
-        officeColour: '#FFBE0B',
-        People: []
-      }
-    : { ...office };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -67,6 +52,7 @@ const OfficeEdit = ({ office, onBack, isNew }) => {
           </button>
       <form className="edit-office-form" onSubmit={handleSubmit}>
         <div className="form-group">
+          <label>NAME</label>
           <input
             type="text"
             name="Name"
@@ -76,6 +62,17 @@ const OfficeEdit = ({ office, onBack, isNew }) => {
           />
         </div>
         <div className="form-group">
+          <label>DESCRIPTION</label>
+          <input
+             label="Description"
+             type="text"
+             placeholder="Description"
+             value={formData.Description}
+             onChange={handleChange}
+          />
+        </div>
+        <div className="form-group">
+        <label>ADDRESS</label>
           <input
             type="text"
             name="address"
@@ -85,6 +82,7 @@ const OfficeEdit = ({ office, onBack, isNew }) => {
           />
         </div>
         <div className="form-group">
+          <label>EMAIL</label>
           <input
             type="email"
             name="email"
@@ -94,6 +92,7 @@ const OfficeEdit = ({ office, onBack, isNew }) => {
           />
         </div>
         <div className="form-group">
+          <label>CONTACT NUMBER</label>
           <input
             type="text"
             name="contactNumber"
@@ -103,6 +102,7 @@ const OfficeEdit = ({ office, onBack, isNew }) => {
           />
         </div>
         <div className="form-group">
+          <label>COFFICE CAPICITY</label>
           <input
             type="number"
             name="Capacity"
@@ -112,16 +112,7 @@ const OfficeEdit = ({ office, onBack, isNew }) => {
           />
         </div>
         <div className="form-group">
-          <input
-            type="text"
-            name="Description"
-            value={formData.Description}
-            onChange={handleChange}
-            placeholder="Description"
-          />
-        </div>
-        <div className="form-group">
-          <label>Office Colour</label>
+          <label>OFFICE COLOUR</label>
           <div className="color-picker">
             {['#FFBE0B', '#FF9B71', '#FB5607', '#97512C', '#DBBADD', '#FF006E', '#A9F0D1', '#00B402', '#489DDA', '#0072E8'].map((colour) => (
               <span
