@@ -3,7 +3,7 @@ import './addoffice.css';
 import { DataContext } from './DataContext';
 
 const AddOffice = ({ onBack }) => {
-  const { offices, setOffices } = useContext(DataContext);
+  const { officeData, setOfficeData } = useContext(DataContext);
   const [officeName, setOfficeName] = useState('');
   const [address, setAddress] = useState('');
   const [email, setEmail] = useState('');
@@ -13,7 +13,7 @@ const AddOffice = ({ onBack }) => {
 
   const handleAddOffice = () => {
     const newOffice = {
-      Id: offices.length + 1,
+      Id: officeData.length + 1,
       Name: officeName,
       Description: address,
       Capacity: parseInt(capacity),
@@ -24,7 +24,7 @@ const AddOffice = ({ onBack }) => {
       officeColour: officeColour,
     };
 
-    setOffices([...offices, newOffice]);
+    setOfficeData([...officeData, newOffice]);
     onBack(); // Navigate back to the office list
   };
 

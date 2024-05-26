@@ -1,124 +1,125 @@
 {
   "staff": [
     {
-      "id": 1,
+      "id": "09a54d49-6e38-44ee-8295-3342ec16064a",
       "firstName": "John",
       "lastName": "Smith",
       "avatar": "avatar1.svg"
     },
     {
-      "id": 2,
+      "id": "73f72839-3788-4618-8a7c-21e91a7d90d5",
       "firstName": "Jane",
       "lastName": "Doe",
       "avatar": "avatar2.svg"
     },
     {
-      "id": 3,
+      "id": "cb208883-9fd7-4b9a-83c1-c8d67f911ff6",
       "firstName": "Mike",
       "lastName": "Johnson",
       "avatar": "avatar3.svg"
     },
     {
-      "id": 4,
+      "id": "4ce25973-ffe0-45a8-901c-4462a9ec763e",
       "firstName": "Emily",
       "lastName": "Davis",
       "avatar": "avatar4.svg"
     },
     {
-      "id": 5,
+      "id": "3a584fa6-f53a-4505-8346-36bfc08016bf",
       "firstName": "David",
       "lastName": "Wilson",
       "avatar": "avatar5.svg"
     },
     {
-      "id": 6,
+      "id": "e607f166-c6cc-487f-8ff0-7750ff4a2b5f",
       "firstName": "Laura",
       "lastName": "Martinez",
       "avatar": "avatar6.svg"
     },
     {
-      "id": 7,
+      "id": "31a51a52-6213-498d-a4e1-4ff2e561d941",
       "firstName": "Chris",
       "lastName": "Brown",
       "avatar": "avatar7.svg"
     },
     {
-      "id": 8,
+      "id": "f41e15c7-5da8-46db-a1f0-0a655d395f18",
       "firstName": "Anna",
       "lastName": "Taylor",
       "avatar": "avatar1.svg"
     },
     {
-      "id": 9,
+      "id": "edcd26e3-bb10-4e15-a575-962400ff2b22",
       "firstName": "James",
       "lastName": "Anderson",
       "avatar": "avatar2.svg"
     },
     {
-      "id": 10,
+      "id": "000d25fe-2138-4c33-822c-283aeef732f5",
       "firstName": "Sophia",
       "lastName": "Thomas",
       "avatar": "avatar3.svg"
     },
     {
-      "id": 11,
+      "id": "86d737d0-766b-4511-b031-bcaa434a01d6",
       "firstName": "Matthew",
       "lastName": "Jackson",
       "avatar": "avatar4.svg"
     },
     {
-      "id": 12,
+      "id": "2c757e29-2291-45b1-8ebd-a0952da1afda",
       "firstName": "Olivia",
       "lastName": "White",
       "avatar": "avatar5.svg"
     },
     {
-      "id": 13,
+      "id": "8b3dce10-86b2-4c0b-bd56-b99bc541208c",
       "firstName": "Ethan",
       "lastName": "Harris",
       "avatar": "avatar6.svg"
     },
     {
-      "id": 14,
+      "id": "83c9b674-8fea-4ef7-bc82-cca44d98fe49",
       "firstName": "Isabella",
       "lastName": "Martin",
       "avatar": "avatar7.svg"
     },
     {
-      "id": 15,
+      "id": "f29bb924-a473-4861-bed5-567effb5191c",
       "firstName": "Alexander",
       "lastName": "Lee",
       "avatar": "avatar1.svg"
     },
     {
-      "id": 16,
+      "id": "e866a08e-2286-4bff-b20c-8f562c34e74c",
       "firstName": "Mia",
       "lastName": "Perez",
       "avatar": "avatar1.svg"
     },
     {
-      "id": 17,
+      "id": "48cf142e-612a-444f-bdb0-3ab80934871c",
       "firstName": "Daniel",
       "lastName": "Thompson",
       "avatar": "avatar4.svg"
     },
     {
-      "id": 18,
+      "id": "997279ff-9835-40aa-9073-a1edd73c3c43",
       "firstName": "Ava",
       "lastName": "Garcia",
       "avatar": "avatar1.svg"
     },
     {
-      "id": 19,
+      "id": "d64fd8a6-bd1a-4ad5-a792-165df793fc8c",
       "firstName": "Jacob",
       "lastName": "Rodriguez",
       "avatar": "avatar7.svg"
     },
     {
-      "id": 20,
+      "id": "3f0758db-bae6-4fc2-a551-f7a751b81255",
       "firstName": "Charlotte",
       "lastName": "Lewis",
       "avatar": "avatar2.svg"
     }
   ]
 }
+
