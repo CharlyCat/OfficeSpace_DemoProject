@@ -1,0 +1,30 @@
+{
+  "files": {
+    "main.css": "/OfficeSpace_DemoProject/static/css/main.aca4b665.css",
+    "main.js": "/OfficeSpace_DemoProject/static/js/main.5d225c36.js",
+    "static/media/Avatar4.svg": "/OfficeSpace_DemoProject/static/media/Avatar4.d77a193fb785a5a9b1918ee2fd232619.svg",
+    "static/media/Avatar3.svg": "/OfficeSpace_DemoProject/static/media/Avatar3.ac0d7c289116eff40875b89c10c81f28.svg",
+    "static/media/Avatar5.svg": "/OfficeSpace_DemoProject/static/media/Avatar5.9a31c0eb6b854a4c3696cfd90bccc78b.svg",
+    "static/media/Avatar1.svg": "/OfficeSpace_DemoProject/static/media/Avatar1.3d5d3f7ba45a66aa6dccc494c27ae195.svg",
+    "static/media/Avatar2.svg": "/OfficeSpace_DemoProject/static/media/Avatar2.97443a77b970983a7b226464e46f0481.svg",
+    "static/media/Avatar6.svg": "/OfficeSpace_DemoProject/static/media/Avatar6.a179eea3db48d50cd0dd69a17a0564b8.svg",
+    "static/media/Avatar7.svg": "/OfficeSpace_DemoProject/static/media/Avatar7.ea67bddfc8f6cfb5ff3eafa2357ab2d5.svg",
+    "static/media/phone.svg": "/OfficeSpace_DemoProject/static/media/phone.49592b4027db7543384371c5dce182ae.svg",
+    "static/media/email.svg": "/OfficeSpace_DemoProject/static/media/email.50328381bdeb82f7f055e162b91710f8.svg",
+    "static/media/people.svg": "/OfficeSpace_DemoProject/static/media/people.b8edae77c262c4e631b8d14c8d0653e8.svg",
+    "static/media/edit.svg": "/OfficeSpace_DemoProject/static/media/edit.f0170505e972d229b9123d34a6ea9b07.svg",
+    "index.html": "/OfficeSpace_DemoProject/index.html",
+    "static/media/search.svg": "/OfficeSpace_DemoProject/static/media/search.19dd23027c65288c9496a82a86480fbe.svg",
+    "static/media/plusbutton.svg": "/OfficeSpace_DemoProject/static/media/plusbutton.c6420c1fe0c66fbab993842408adfa9d.svg",
+    "static/media/location.svg": "/OfficeSpace_DemoProject/static/media/location.8e13a358841988d3becd5ecb2ba54e5f.svg",
+    "static/media/close-circle.svg": "/OfficeSpace_DemoProject/static/media/close-circle.ceb6fe0b1f3c8153478b410d393e6551.svg",
+    "static/media/more-nav.svg": "/OfficeSpace_DemoProject/static/media/more-nav.34ff21dd389e496ebfecd1b4d71ac9ff.svg",
+    "static/media/arrow-left.svg": "/OfficeSpace_DemoProject/static/media/arrow-left.1bd2a1b2731e4df393d671a013fdd1ae.svg",
+    "main.aca4b665.css.map": "/OfficeSpace_DemoProject/static/css/main.aca4b665.css.map",
+    "main.5d225c36.js.map": "/OfficeSpace_DemoProject/static/js/main.5d225c36.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.aca4b665.css",
+    "static/js/main.5d225c36.js"
+  ]
+}
