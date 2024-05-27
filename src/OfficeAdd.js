@@ -11,7 +11,6 @@ const OfficeAdd = ({ onBack }) => {
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [capacity, setCapacity] = useState('');
-  const [description, setDescription] = useState('');
   const [officeColour, setOfficeColour] = useState('');
   const colors = ['#FFBE0B', '#FF9B71', '#FB5607', '#97512C', '#DBBADD', '#FF006E', '#A9F0D1', '#00B402', '#489DDA', '#0072E8', '#B19CD9'];
 
@@ -19,7 +18,6 @@ const OfficeAdd = ({ onBack }) => {
     const newOffice = {
       Id: generateUUID(),
       Name: officeName,
-      Description: address,
       Capacity: parseInt(capacity),
       People: [],
       contactNumber: phone,
@@ -70,7 +68,7 @@ const OfficeAdd = ({ onBack }) => {
         <div className="form-group">
           <label>Phone Number</label>
           <input
-            type="text"
+            type="number"
             placeholder="Phone Number"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}

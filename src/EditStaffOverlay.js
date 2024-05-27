@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './addstaffoverlay.css';
 import closeIcon from './assets/close-circle.svg';
 import backArrowIcon from './assets/arrow-left.svg';
@@ -21,28 +21,44 @@ const avatarMap = {
 };
 
 export const EditStaffOverlayStep1 = ({ onNext, onClose, staffName, setStaffName, staffSurname, setStaffSurname }) => {
+    console.log('staffName =',staffName)
+    console.log('staffSurname =',staffSurname)
+    const [localName, setLocalName] =useState(staffName);
+    const [localSurname, setLocalSurname] =useState(staffSurname);
+
     const handleNext = (e) => {
       e.preventDefault();
       onNext();
+    };
+
+    const onHandleNameChange = (event) => {
+      let newName = event.target.value;
+      setLocalName(newName);
+      setStaffName(newName);
+    };
+
+    const onHandleSurnameChange = (event) => {
+      let newSurname = event.target.value;
+      setLocalSurname(newSurname);
+      setStaffSurname(newSurname);
     };
   
     return (
       <div className="addstaff-overlay">
         <div className="addstaff-overlay-content">
           <div className="addstaff-overlay-header">
+            <h2>Edit Staff Member</h2>
             <button className="addstaff-close-button" onClick={onClose}>
               <img src={closeIcon} alt="Close" />
             </button>
-            <h2>Edit Staff Member</h2>
-            <span style={{ width: 30 }}></span> {/* Placeholder to balance the header */}
           </div>
           <form onSubmit={handleNext} className="addstaff-overlay-form">
             <div className="addstaff-input-group">
               <input
                 type="text"
                 placeholder="First Name"
-                value={staffName}
-                onChange={(e) => setStaffName(e.target.value)}
+                value={localName}
+                onChange={(e) => onHandleNameChange(e)}
                 required
               />
             </div>
@@ -50,8 +66,8 @@ export const EditStaffOverlayStep1 = ({ onNext, onClose, staffName, setStaffName
               <input
                 type="text"
                 placeholder="Last Name"
-                value={staffSurname}
-                onChange={(e) => setStaffSurname(e.target.value)}
+                value={localSurname}
+                onChange={(e) => onHandleSurnameChange(e)}
                 required
               />
             </div>
@@ -65,7 +81,13 @@ export const EditStaffOverlayStep1 = ({ onNext, onClose, staffName, setStaffName
   };
   
   export const EditStaffOverlayStep2 = ({ onBack, onSave, onClose, selectedAvatar, setSelectedAvatar }) => {
+    const [localAvatar, setLocalAvatar] =useState(selectedAvatar);
     const avatars = Object.keys(avatarMap);
+
+    const onHandleAvatarChange = (selectedAvatar) => {
+      setLocalAvatar(selectedAvatar);
+      setSelectedAvatar(selectedAvatar);
+    };
 
     const handleSave = (e) => {
       e.preventDefault();
@@ -91,8 +113,8 @@ export const EditStaffOverlayStep1 = ({ onNext, onClose, staffName, setStaffName
                 key={index}
                 src={avatarMap[avatarKey]}
                 alt={`Avatar ${index + 1}`}
-                className={`addstaff-avatar-icon ${selectedAvatar === avatarMap[avatarKey] ? 'selected' : ''}`}
-                onClick={() => setSelectedAvatar(avatarMap[avatarKey])}
+                className={`addstaff-avatar-icon ${localAvatar === avatarMap[avatarKey] ? 'selected' : ''}`}
+                onClick={() => onHandleAvatarChange(avatarMap[avatarKey])}
               />
             ))}
           </div>

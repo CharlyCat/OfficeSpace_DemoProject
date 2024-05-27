@@ -10,6 +10,7 @@ import plusButton from './assets/plusbutton.svg';
 import {AddStaffOverlayStep1, AddStaffOverlayStep2 } from './AddStaffOverlay';
 import {EditStaffOverlayStep1, EditStaffOverlayStep2 } from './EditStaffOverlay';
 import {generateUUID} from './Utils';
+import { GetStaffDetailsById } from './GetStaffDetailsById';
 import avatar1 from './assets/Avatar1.svg';
 import avatar2 from './assets/Avatar2.svg';
 import avatar3 from './assets/Avatar3.svg';
@@ -30,16 +31,20 @@ const avatarMap = {
 
 function OfficeApp() {
   const { officeData, setOfficeData, activeOfficeId, setActiveOfficeId, staffData, setStaffData, 
-          officeRenderStatus, setOfficeRenderStatus, staffId, setStaffId } = useContext(DataContext);
+          officeRenderStatus, setOfficeRenderStatus, staffId, setStaffId, isEditOverlayOpen, setIsEditOverlayOpen } = useContext(DataContext);
   const activeOffice = officeData.find(office => office.Id === activeOfficeId);
   
   //States for Add staff memeber
-  const [isEditOverlayOpen, setIsEditOverlayOpen] = useState(false);
   const [isAddOverlayOpen, setIsAddOverlayOpen] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
   const [staffName, setStaffName] = useState('');
   const [staffSurname, setStaffSurname] = useState('');
   const [selectedAvatar, setSelectedAvatar] = useState(null);
+    console.log('OfficeApp'); //TODO
+    console.log('staffId =',staffId); //TODO
+    console.log('staffName =',staffName); //TODO
+    console.log('staffSurname =',staffSurname); //TODO
+    console.log('selectedAvatar =',selectedAvatar); //TODO
 
   //Handle Back Navigation from Office
   const onHandleBackNav = () => {
@@ -84,26 +89,32 @@ function OfficeApp() {
   };
 
   const onSaveEditStaffMember = () => {
-    
     const updatedStaffMember = {
       id: staffId, 
       firstName: staffName,
       lastName: staffSurname,
       avatar: Object.keys(avatarMap).find(key => avatarMap[key] === selectedAvatar),
     };
-
-    //Update Staff data
-    setStaffData((previousData)=>{
-      console.log(previousData);
-      let updatedData = {...previousData};
-      updatedData.foreach((item) => {
-        //If this is the staff member then update the data
-        if(item.id === staffId){
-          item = updatedStaffMember;
+    //Update Staff data in the context
+    setStaffData((previousData) => {
+    
+      // Ensure previousData and previousData.staff are defined and staff is an array
+      if (!previousData || !Array.isArray(previousData)) {
+        console.error('PreviousData or PreviousData.staff is not properly defined:', previousData);
+        return previousData; // Return the original state if it's not properly defined
+      }
+    
+      // Map over the 'staff' array to update the specific staff member
+      const updatedStaff = previousData.map((item) => {
+        if (item.id === staffId) {
+          return updatedStaffMember;//return the updated staff member
         }
-      })
-      return updatedData;
-    })
+        return item;//return the original staff member, unedited
+      });
+    
+      // Return the new state object with the updated 'staff' array
+      return updatedStaff;
+    });
 
     // Close overlay and reset state
     setIsEditOverlayOpen(false);
@@ -197,8 +208,57 @@ function OfficeApp() {
     
   }
 
-  console.log("isAddOverlayOpen=",isAddOverlayOpen)
-  console.log("isEditOverlayOpen=",isEditOverlayOpen)
+  const renderEditStaff = () => {
+    let staffDetails = GetStaffDetailsById();
+    console.log('renderEditStaff')
+    console.log('staffDetails =',staffDetails)
+
+    if(isEditOverlayOpen){
+      if(currentStep === 1){
+        return <EditStaffOverlayStep1
+        onNext={onNext}
+        onClose={onCloseStaffMember}
+        staffId={staffDetails.id}
+        staffName={staffDetails.firstName}
+        setStaffName={setStaffName}
+        staffSurname={staffDetails.lastName}
+        setStaffSurname={setStaffSurname}
+      />
+      }else{
+        return <EditStaffOverlayStep2
+        onBack={onBack}
+        onSave={onSaveEditStaffMember}
+        onClose={onCloseStaffMember}
+        selectedAvatar={staffDetails.avatar}
+        setSelectedAvatar={setSelectedAvatar}
+      />
+      }
+    }
+
+    //  {isEditOverlayOpen && (
+    //   currentStep === 1 ? (
+    //     <EditStaffOverlayStep1
+    //       onNext={onNext}
+    //       onClose={onCloseStaffMember}
+    //       staffId={staffId}
+    //       staffName={staffName}
+    //       setStaffName={setStaffName}
+    //       staffSurname={staffSurname}
+    //       setStaffSurname={setStaffSurname}
+    //     />
+    //   ) : (
+    //     <EditStaffOverlayStep2
+    //       onBack={onBack}
+    //       onSave={onSaveEditStaffMember}
+    //       onClose={onCloseStaffMember}
+    //       selectedAvatar={selectedAvatar}
+    //       setSelectedAvatar={setSelectedAvatar}
+    //     />
+    //   )
+    // )}      
+
+  }
+
   return (
     <div className="container">
       {renderAllOfficeOrEditOffice()}
@@ -222,28 +282,8 @@ function OfficeApp() {
         )
       )}
 
-      {isEditOverlayOpen && (
-        currentStep === 1 ? (
-          <EditStaffOverlayStep1
-            onNext={onNext}
-            onClose={onCloseStaffMember}
-            staffId={staffId}
-            staffName={staffName}
-            setStaffName={setStaffName}
-            staffSurname={staffSurname}
-            setStaffSurname={setStaffSurname}
-          />
-        ) : (
-          <EditStaffOverlayStep2
-            onBack={onBack}
-            onSave={onSaveEditStaffMember}
-            onClose={onCloseStaffMember}
-            selectedAvatar={selectedAvatar}
-            setSelectedAvatar={setSelectedAvatar}
-          />
-        )
-      )}      
-
+      {renderEditStaff()}
+      
     </div>
   );
 }

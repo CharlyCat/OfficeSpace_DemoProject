@@ -5,10 +5,6 @@ import {EditStaffOverlay} from './EditStaffOverlay'
 
 const EditStaffMemberPopup = ({ onEdit, onDelete, onClose }) => {
   
-  // const onHandleEditClick = () = > {
-  //   EditStaffOverlay
-  // }
-  
   return (
     <div className="popup-overlay">
       <div className="popup-content">

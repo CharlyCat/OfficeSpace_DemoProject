@@ -62,16 +62,6 @@ const OfficeEdit = ({ office, onBack, isNew }) => {
           />
         </div>
         <div className="form-group">
-          <label>DESCRIPTION</label>
-          <input
-             label="Description"
-             type="text"
-             placeholder="Description"
-             value={formData.Description}
-             onChange={handleChange}
-          />
-        </div>
-        <div className="form-group">
         <label>ADDRESS</label>
           <input
             type="text"
@@ -94,7 +84,7 @@ const OfficeEdit = ({ office, onBack, isNew }) => {
         <div className="form-group">
           <label>CONTACT NUMBER</label>
           <input
-            type="text"
+            type="number"
             name="contactNumber"
             value={formData.contactNumber}
             onChange={handleChange}

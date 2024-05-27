@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './popup.css';
 
+
 const EditStaffMemberPopup = ({ onEdit, onDelete, onClose }) => {
   return (
     <div className="popup-overlay">

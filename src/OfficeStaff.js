@@ -25,10 +25,9 @@ const avatarMap = {
 
 //Render Single Office accordion and Staff member list
 const OfficeStaff = () => {
-  const {activeOfficeId, staffData, officeData, setStaffData, setOfficeData } = useContext(DataContext);
+  const {activeOfficeId, staffData, officeData, setStaffData, setOfficeData,setIsEditOverlayOpen, staffId, setStaffId } = useContext(DataContext);
   const [searchQuery, setSearchQuery] = useState('');
   const [showEditPopup, setShowEditPopup] = useState(false);
-  const [selectedStaff, setSelectedStaff] = useState(null);
   const [showDeletePopup, setShowDeletePopup] = useState(false);
   const [activeOfficeStaff, setActiveOfficeStaff] = useState(()=> {
     let currentActiveOffice = officeData.find((singleOffice) => singleOffice.Id === activeOfficeId);
@@ -36,6 +35,9 @@ const OfficeStaff = () => {
     return results
   });
 
+  console.log('OfficeStaff!!!!')
+  console.log('activeOfficeStaff =', activeOfficeStaff)
+  console.log('staffId =', staffId)
   useEffect(() => {
     const currentActiveOffice = officeData.find((singleOffice) => singleOffice.Id === activeOfficeId);
     const results = currentActiveOffice ? currentActiveOffice.People : [];
@@ -47,49 +49,35 @@ const OfficeStaff = () => {
   };
 
   const filterStaffBasedOnQuery = (officePeople) => {
-    // If searchQuery is empty or only whitespace, return the full list of active office staff
+    // searchQuery empty or only whitespace, return the full list of active office staff
     if (!searchQuery || searchQuery.trim() === '') {
-      console.log("Returning the full list as there is not query string", activeOfficeStaff);
       return activeOfficeStaff;
     }
-  
-    console.log("activeOfficeStaff=", activeOfficeStaff);
-    console.log('Filtering staff using query string =', searchQuery);
-  
-    // Get the list of all staff members that are part of the active office, this includes the full names
+    // List of all staff members that are part of the active office, this includes the full names
     const activeStaffWithNames = officePeople.map(personId => {
       // Find the full staff data for each person in officePeople
       return staffData.find(staff => staff.id === personId);
     }).filter(Boolean); // Filter out any undefined values in case of missing staff data
   
-    // Log active staff for debugging purposes
-    console.log('Active staff in the office:', activeStaffWithNames);
-  
     // Filter the active staff list based on the search query
     const filteredStaff = activeStaffWithNames.filter((person) => {
-      console.log('Person =', person);
       let staffName = `${person.firstName} ${person.lastName}`;
       let found = staffName.toLowerCase().includes(searchQuery.toLowerCase().trim());
-      console.log('staffName =', staffName, "Found =", found);
       return found;
     });
     let filteredStaffListOnlyIds = [];
     filteredStaff.map((staffMember) =>{
-      console.log("staffMember",staffMember)
       filteredStaffListOnlyIds.push(staffMember.id);
     })
 
-    console.log("filteredStaffListOnlyIds",filteredStaffListOnlyIds)
-  
     // Return the list of filtered staff members
     return filteredStaffListOnlyIds;
   };
   
-  
-  
   const handleEditClick = (staffId) => {
-    console.log("Edint staff ID", staffId)
-    setSelectedStaff(staffId);
+    console.log('Edit Staff Button Clicked'); //TODO Working 
+    console.log('staffId');
+    setStaffId(staffId);
     setShowEditPopup(true);
   };
 
@@ -99,7 +87,7 @@ const OfficeStaff = () => {
   };
 
   const handleConfirmDelete = () => {
-    const updatedStaffData = staffData.filter((staff) => staff.id !== selectedStaff);
+    const updatedStaffData = staffData.filter((staff) => staff.id !== staffId);
     setStaffData(updatedStaffData);
   
     let allOfficeData = [...officeData];
@@ -112,7 +100,7 @@ const OfficeStaff = () => {
       console.error('Office not found');
       return;
     }
-    let indexToBeDeleted = currentActiveOffice.People.findIndex((item) => item === selectedStaff);
+    let indexToBeDeleted = currentActiveOffice.People.findIndex((item) => item === staffId);
   
     if (indexToBeDeleted === -1) {
       console.error('Staff member to be deleted not found');
@@ -125,8 +113,10 @@ const OfficeStaff = () => {
   
 
   const handleEditStaff = () => {
-    // Implement edit staff logic here
+    console.log('OfficeStaff - handleEdite Staff')
+    setIsEditOverlayOpen(true);
     setShowEditPopup(false);
+    setStaffId(staffId);
   };
   
   return (
@@ -170,7 +160,7 @@ const OfficeStaff = () => {
       </div>
       {showEditPopup && (
         <EditStaffMemberPopup
-          onEdit={handleEditStaff}
+          onEdit={() =>handleEditStaff ()}
           onDelete={handleDeleteClick}
           onClose={() => setShowEditPopup(false)}
         />

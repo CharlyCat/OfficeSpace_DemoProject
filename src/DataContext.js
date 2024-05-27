@@ -13,6 +13,7 @@ export const OfficeRenderStatus = {
 export const DataContext = createContext();
 
 export const DataProvider = ({ children }) => {
+  const [isEditOverlayOpen, setIsEditOverlayOpen] = useState(false);
   const [officeData, setOfficeData] = useState([]);
   const [staffData, setStaffData] = useState([]);
   const [activeOfficeId, setActiveOfficeId] = useState(null);
@@ -36,7 +37,9 @@ export const DataProvider = ({ children }) => {
         officeRenderStatus,
         setOfficeRenderStatus,
         staffId,
-        setStaffId
+        setStaffId,
+        isEditOverlayOpen,
+        setIsEditOverlayOpen,
 
     }}>
       {children}
