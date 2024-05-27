@@ -21,8 +21,6 @@ const avatarMap = {
 };
 
 export const EditStaffOverlayStep1 = ({ onNext, onClose, staffName, setStaffName, staffSurname, setStaffSurname }) => {
-    console.log('staffName =',staffName)
-    console.log('staffSurname =',staffSurname)
     const [localName, setLocalName] =useState(staffName);
     const [localSurname, setLocalSurname] =useState(staffSurname);
 
@@ -108,15 +106,28 @@ export const EditStaffOverlayStep1 = ({ onNext, onClose, staffName, setStaffName
           </div>
           <h3 className="addstaff-avatar-heading">Avatar</h3>
           <div className="addstaff-avatar-selection">
-            {avatars.map((avatarKey, index) => (
-              <img
-                key={index}
-                src={avatarMap[avatarKey]}
-                alt={`Avatar ${index + 1}`}
-                className={`addstaff-avatar-icon ${localAvatar === avatarMap[avatarKey] ? 'selected' : ''}`}
-                onClick={() => onHandleAvatarChange(avatarMap[avatarKey])}
-              />
-            ))}
+            <div className="addstaff-avatar-row"> 
+              {avatars.slice(0, 4).map((avatarKey, index) => (
+                  <img
+                    key={index}
+                    src={avatarMap[avatarKey]}
+                    alt={`Avatar ${index + 1}`}
+                    className={`addstaff-avatar-icon ${localAvatar === avatarMap[avatarKey] ? 'selected' : ''}`}
+                    onClick={() => onHandleAvatarChange(avatarMap[avatarKey])}
+                  />
+                ))}
+              </div>
+              <div className="addstaff-avatar-row">
+                {avatars.slice(4).map((avatarKey, index) => (
+                  <img
+                    key={index}
+                    src={avatarMap[avatarKey]}
+                    alt={`Avatar ${index + 1}`}
+                    className={`addstaff-avatar-icon ${localAvatar === avatarMap[avatarKey] ? 'selected' : ''}`}
+                    onClick={() => onHandleAvatarChange(avatarMap[avatarKey])}
+                  />
+                ))}
+            </div>
           </div>
           <div className="addstaff-overlay-footer">
             <button type="button" className="addstaff-save-button" onClick={handleSave}>UPDATE STAFF MEMBER</button>

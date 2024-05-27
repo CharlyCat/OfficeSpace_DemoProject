@@ -3,13 +3,12 @@ import officesImported from './Data/officeData.json';
 import staffImported from './Data/staffData.json';
 
 export const OfficeRenderStatus = {
-  LIST_ALL: 'list_all',//Show all the offices
-  EDIT_MODE: 'edit_mode',//edit the active office
-  ADD_MODE: 'add_mode',//add a new office
-  VIEW_MODE: 'view_mode',//view the staff on the office
+  LIST_ALL: 'list_all', //Show all the offices
+  EDIT_MODE: 'edit_mode', //edit the active office
+  ADD_MODE: 'add_mode', //add a new office
+  VIEW_MODE: 'view_mode', //view the staff in office
 };
 
-/** Context to access data across componets */
 export const DataContext = createContext();
 
 export const DataProvider = ({ children }) => {

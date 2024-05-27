@@ -34,17 +34,11 @@ function OfficeApp() {
           officeRenderStatus, setOfficeRenderStatus, staffId, setStaffId, isEditOverlayOpen, setIsEditOverlayOpen } = useContext(DataContext);
   const activeOffice = officeData.find(office => office.Id === activeOfficeId);
   
-  //States for Add staff memeber
   const [isAddOverlayOpen, setIsAddOverlayOpen] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
   const [staffName, setStaffName] = useState('');
   const [staffSurname, setStaffSurname] = useState('');
   const [selectedAvatar, setSelectedAvatar] = useState(null);
-    console.log('OfficeApp'); //TODO
-    console.log('staffId =',staffId); //TODO
-    console.log('staffName =',staffName); //TODO
-    console.log('staffSurname =',staffSurname); //TODO
-    console.log('selectedAvatar =',selectedAvatar); //TODO
 
   //Handle Back Navigation from Office
   const onHandleBackNav = () => {
@@ -52,7 +46,6 @@ function OfficeApp() {
     setActiveOfficeId(null);
   };
 
-  //Handlers to add new staff member
   const onNext = () => {
     setCurrentStep(2);
   };
@@ -70,7 +63,7 @@ function OfficeApp() {
       avatar: Object.keys(avatarMap).find(key => avatarMap[key] === selectedAvatar),
     };
 
-    //Update Data with new staff member
+    //Update staffData with new staff member
     setStaffData([...staffData, newStaffMember]);
     const updatedOfficeData = officeData.map(office => 
       office.Id === activeOfficeId 
@@ -95,9 +88,8 @@ function OfficeApp() {
       lastName: staffSurname,
       avatar: Object.keys(avatarMap).find(key => avatarMap[key] === selectedAvatar),
     };
-    //Update Staff data in the context
+    //Update staffData in Context
     setStaffData((previousData) => {
-    
       // Ensure previousData and previousData.staff are defined and staff is an array
       if (!previousData || !Array.isArray(previousData)) {
         console.error('PreviousData or PreviousData.staff is not properly defined:', previousData);
@@ -107,9 +99,9 @@ function OfficeApp() {
       // Map over the 'staff' array to update the specific staff member
       const updatedStaff = previousData.map((item) => {
         if (item.id === staffId) {
-          return updatedStaffMember;//return the updated staff member
+          return updatedStaffMember; //return the updated staff member
         }
-        return item;//return the original staff member, unedited
+        return item; //return the original staff member, unedited
       });
     
       // Return the new state object with the updated 'staff' array
@@ -234,29 +226,6 @@ function OfficeApp() {
       />
       }
     }
-
-    //  {isEditOverlayOpen && (
-    //   currentStep === 1 ? (
-    //     <EditStaffOverlayStep1
-    //       onNext={onNext}
-    //       onClose={onCloseStaffMember}
-    //       staffId={staffId}
-    //       staffName={staffName}
-    //       setStaffName={setStaffName}
-    //       staffSurname={staffSurname}
-    //       setStaffSurname={setStaffSurname}
-    //     />
-    //   ) : (
-    //     <EditStaffOverlayStep2
-    //       onBack={onBack}
-    //       onSave={onSaveEditStaffMember}
-    //       onClose={onCloseStaffMember}
-    //       selectedAvatar={selectedAvatar}
-    //       setSelectedAvatar={setSelectedAvatar}
-    //     />
-    //   )
-    // )}      
-
   }
 
   return (

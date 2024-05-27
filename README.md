@@ -13,9 +13,9 @@ Min-width is set to 900px to cater for tablet or smaller laptops.
 - If a user clicks on the office they must be able to view the office details including individuals who work at the office.
 - The user must be able to create, update, and delete office workers.
 - There must be a search bar on the office view page.
-  - This component must filter the list of users within the office as the user is typing.
+- This component must filter the list of users within the office as the user is typing.
 - The system is designed for phones.
-  - Styles need to be put into place to stop the main view from getting too wide.
+- Styles need to be put into place to stop the main view from getting too wide.
 
 ## Features
 1. **Create and Manage Offices**
@@ -49,3 +49,4 @@ Clone the repository:
 
 ## Contact
 - Charlene van der Walt - charlycat8@gmail.com
+- LinkedIn - https://www.linkedin.com/in/charlene-barnes
