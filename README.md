@@ -1,4 +1,5 @@
 # OfficeSpace_DemoProject - Office Management System
+View live - GithubPage https://charlycat.github.io/OfficeSpace_DemoProject/
 
 ## Project Overview
 Application is for managing various office spaces.
